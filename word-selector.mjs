@@ -18,6 +18,11 @@ const newWords = [];
     let _break = false;
     do {
         const word = words[random()];
+
+        if (challenges.includes(word) || newWords.includes(word)) {
+            console.log("Already added");
+            continue;
+        }
         const { confirm } = await inquirer.prompt([
             {
                 name: "confirm",
@@ -27,9 +32,7 @@ const newWords = [];
             }
         ])
 
-        if (challenges.includes(word) || newWords.includes(word)) {
-            console.log("Already added");
-        } else if (confirm === "yes") {
+        if (confirm === "yes") {
             newWords.push(word);
         }
         _break = confirm === "exit";
